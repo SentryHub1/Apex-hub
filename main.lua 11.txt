@@ -1,0 +1,193 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+-- Paste this before 'CreateWindow()'
+WindUI:Localization({ -- it automatically detects the user's language 
+    Enabled = true,
+    Prefix = "loc:",
+    DefaultLanguage = "en",
+    Translations = {
+        ["ru"] = {
+            ["WINDUI_EXAMPLE"] = "WindUI Пример",
+            ["WELCOME"] = "Добро пожаловать в WindUI!",
+            ["SETTINGS"] = "Настройки",
+            ["FEATURES"] = "Функционал",
+            ["LOGO"] = "rbxassetid://...", -- russian logo
+        },
+        ["en"] = {
+            ["WINDUI_EXAMPLE"] = "WindUI Example",
+            ["WELCOME"] = "Welcome to WindUI!",
+            ["SETTINGS"] = "Settings",
+            ["FEATURES"] = "Features",
+            ["LOGO"] = "rbxassetid://...", -- english logo
+        },
+        -- and more languages...
+    }
+})
+
+local Window = WindUI:CreateWindow({
+    Title = "⚡ ApexHub ⚡",
+    Icon = "door-open", -- lucide icon. optional
+    Author = "by v0rtify", -- optional
+})
+
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
+})
+
+local Tab = Window:Tab({
+    Title = "Catching",
+    Icon = "zap", -- optional
+    Locked = false,
+})
+
+Window:Divider()
+
+local Slider = Tab:Slider({
+    Title = "Ball magnet size",
+    Desc = "DOES NOR WORK YET INPROGRESS",
+    
+    -- To make float number supported, 
+    -- make the Step a float number.
+    -- example: Step = 0.1
+    Step = 1,
+    Value = {
+        Min = 20,
+        Max = 120,
+        Default = 70,
+    },
+    Callback = function(value)
+        print(value)
+    end
+})
+WindUI:Notify({
+    Title = "Notification Title",
+    Content = "Join my discord!",
+    Duration = 3, -- 3 seconds
+    Icon = "bird",
+})
+
+local Button = Tab:Button({
+    Title = "ball magnet",
+    Desc = "DOES NOR WORK YET INPROGRESS",
+    Locked = false,
+    Callback = function()
+        print("hi")
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "Sliders",
+    Icon = "zap", -- optional
+    Locked = false,
+})
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+Tab:Slider({
+    Title = "Speed Slider",
+    Desc = "Change walk speed",
+    Step = 1,
+    Value = {
+        Min = 16,
+        Max = 120,
+        Default = 16,
+    },
+    Callback = function(value)
+        local character = player.Character
+        if character then
+            local humanoid = character:FindFirstChild("Humanoid")
+            if humanoid then
+                humanoid.WalkSpeed = value
+            end
+        end
+    end
+})
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+Tab:Slider({
+    Title = "Jump Boost",
+    Desc = "Change jump height",
+    Step = 5,
+    Value = {
+        Min = 50,
+        Max = 200,
+        Default = 50,
+    },
+    Callback = function(value)
+        local character = player.Character
+        if not character then return end
+
+        local humanoid = character:FindFirstChild("Humanoid")
+        if not humanoid then return end
+
+        humanoid.JumpPower = value
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "Throwing",
+    Icon = "zap", -- optional
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "Aimbot",
+    Desc = "QB aimbot",
+    Locked = false,
+    Callback = function()
+        -- ...
+    end
+})
+
+Window:Divider()
+
+local Section = Window:Section({
+    Title = "Settings",
+    Icon = "bird",
+    Opened = true,
+})
+
+local Tab = Window:Tab({
+    Title = "Settings",
+    Icon = "bird", -- optional
+    Locked = false,
+})
+
+local Keybind = Tab:Keybind({
+    Title = "Keybind",
+    Desc = "Keybind to open ui",
+    Value = "o",
+    Callback = function(o)
+        Window:SetToggleKey(Enum.KeyCode[0])
+    end
+})
+
+local Colorpicker = Tab:Colorpicker({
+    Title = "Colorpicker",
+    Desc = "Colorpicker Description",
+    Default = Color3.fromRGB(0, 255, 0),
+    Transparency = 50,
+    Locked = false,
+    Callback = function(color) 
+        print("Background color: " .. tostring(color))
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "chasing",
+    Icon = "bird", -- optional
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "auto chase",
+    Desc = "In progress becuase when pressed it spawns another button",
+    Locked = false,
+    Callback = function()
+Print("hi")
+})
